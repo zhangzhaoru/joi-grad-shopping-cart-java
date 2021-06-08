@@ -3,6 +3,7 @@ package com.thoughtworks.codepairing.service;
 import com.thoughtworks.codepairing.model.Customer;
 import com.thoughtworks.codepairing.model.Order;
 import com.thoughtworks.codepairing.model.Product;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -16,12 +17,13 @@ public class ShoppingCart {
 
     private static final int MAX_ACCOUNT_CAPACITY = 100;
     private static final int MAX_PRODUCT_CAPACITY = 20;
-
+    private Logger logger = Logger.getLogger(ShoppingCart.class);
     private static HashMap<Customer, List<Product>> account = null;
 
     private static ShoppingCart instance = null;
 
     private ShoppingCart() {
+        logger.info("Class shoppingCart instantiated,initialization account");
         account = new HashMap<Customer, List<Product>>(MAX_ACCOUNT_CAPACITY);
     }
 
@@ -34,12 +36,15 @@ public class ShoppingCart {
 
     public boolean addCustomer(Customer customer) {
         if (account.containsKey(customer)) {
+            logger.info("Account does not contain this customer :" + customer.getName());
             return false;
         } else {
             if (account.size() == MAX_ACCOUNT_CAPACITY) {
+                logger.info("Account is full");
                 return false;
             } else {
                 account.put(customer, null);
+                logger.info("Account added customer successfully,customerName: " + customer.getName());
                 return true;
             }
         }
@@ -57,6 +62,7 @@ public class ShoppingCart {
     public boolean addProduct(Customer customer, Product product) {
         if (!account.containsKey(customer)) {
             if (!addCustomer(customer)) {
+                logger.info("Account failed to add the customer,customer: " + customer.getName());
                 return false;
             }
         }
@@ -68,13 +74,15 @@ public class ShoppingCart {
                 products.add(product);
                 account.put(customer, products);
                 checkout(customer);
-
+                logger.info("Customer added product successfully,customer:" + customer.getName() + " product: " + product.getName());
             } else {
                 if (products.size() == MAX_PRODUCT_CAPACITY) {
+                    logger.info("Customer product list is full,customer:" + customer.getName());
                     return false;
                 } else {
                     products.add(product);
                     account.put(customer, products);
+                    logger.info("Customer added product successfully,customer:" + customer.getName() + " product: " + product.getName());
                     checkout(customer);
                 }
             }
@@ -85,6 +93,7 @@ public class ShoppingCart {
 
     public boolean delProdect(Customer customer,String prodectName){
         if(!account.containsKey(customer)){
+            logger.info(prodectName + " not exists in this customer's product list");
             return false;
         }
         List<Product> products = account.get(customer);
@@ -93,19 +102,24 @@ public class ShoppingCart {
                 if (products.remove(product)) {
                     account.put(customer,products);
                     checkout(customer);
+                    logger.info("Deleted successfully");
                     return true;
                 }
+                logger.info("Delete failed");
                 return false;
             }
         }
+        logger.info("The product does not exist,delete failed");
         return false;
     }
 
     public boolean delCustomer(Customer customer){
         if(account.containsKey(customer)){
             account.remove(customer);
+            logger.info("Customer deleted successfully");
             return true;
         }
+        logger.info("The customer does not exist, delete failed");
         return false;
     }
 
@@ -113,6 +127,7 @@ public class ShoppingCart {
         if (account.containsKey(customer)) {
             return account.get(customer);
         } else {
+            logger.info("The customer does not exist");
             return null;
         }
     }
@@ -138,6 +153,7 @@ public class ShoppingCart {
         }
 
         customer.setOrder(new Order(totalPrice, loyaltyPointsEarned));
+        logger.info("Order refresh completed");
     }
 
     public void show() {
@@ -152,6 +168,7 @@ public class ShoppingCart {
     }
 
     public void destroyAccount() {
+        logger.info("account reinitialization completed");
         account = new HashMap<Customer, List<Product>>(MAX_ACCOUNT_CAPACITY);
     }
 
