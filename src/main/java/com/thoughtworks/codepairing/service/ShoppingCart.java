@@ -89,13 +89,21 @@ public class ShoppingCart {
         }
         List<Product> products = account.get(customer);
         for (Product product : products) {
-            if(prodectName.equals(product.getName())){
-                if(products.remove(product)){
+            if (prodectName.equals(product.getName())) {
+                if (products.remove(product)) {
                     checkout(customer);
                     return true;
                 }
                 return false;
             }
+        }
+        return false;
+    }
+
+    public boolean delCustomer(Customer customer){
+        if(account.containsKey(customer)){
+            account.remove(customer);
+            return true;
         }
         return false;
     }
