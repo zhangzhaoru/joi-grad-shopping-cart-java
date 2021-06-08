@@ -4,7 +4,6 @@ import java.util.Objects;
 
 public class Customer {
     private String name;
-
     private Order order;
 
     public Customer(String name) {

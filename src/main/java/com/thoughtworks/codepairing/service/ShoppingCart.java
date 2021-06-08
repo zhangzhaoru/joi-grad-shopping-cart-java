@@ -83,6 +83,23 @@ public class ShoppingCart {
         return true;
     }
 
+    public boolean delProdect(Customer customer,String prodectName){
+        if(!account.containsKey(customer)){
+            return false;
+        }
+        List<Product> products = account.get(customer);
+        for (Product product : products) {
+            if(prodectName.equals(product.getName())){
+                if(products.remove(product)){
+                    checkout(customer);
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
     public List<Product> getProducts(Customer customer) {
         if (account.containsKey(customer)) {
             return account.get(customer);
