@@ -1,5 +1,6 @@
 package com.thoughtworks.codepairing.model;
 
+import com.thoughtworks.codepairing.service.ShoppingCart;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -29,8 +30,8 @@ public class ShoppingCartTest {
         shoppingCart.addCustomer(customer);
         List<Product> products = asList(new Product(PRICE, "", PRODUCT));
         shoppingCart.addProducts(customer, products);
-        Order order = shoppingCart.checkout(customer);
-        assertEquals(100.0, order.getTotalPrice(), 0.0);
+        System.out.println(customer.getOrder().toString());
+        assertEquals(100.0, customer.getOrder().getTotalPrice(), 0.0);
     }
 
     @Test
@@ -39,9 +40,9 @@ public class ShoppingCartTest {
         shoppingCart.addCustomer(customer);
         List<Product> products = asList(new Product(PRICE, "", PRODUCT));
         shoppingCart.addProducts(customer, products);
-        Order order = shoppingCart.checkout(customer);
+        System.out.println(customer.getOrder().toString());
 
-        assertEquals(20, order.getLoyaltyPoints());
+        assertEquals(20, customer.getOrder().getLoyaltyPoints());
     }
 
     @Test
@@ -50,8 +51,8 @@ public class ShoppingCartTest {
         shoppingCart.addCustomer(customer);
         List<Product> products = asList(new Product(PRICE, "DIS_10_ABCD", PRODUCT));
         shoppingCart.addProducts(customer, products);
-        Order order = shoppingCart.checkout(customer);
-        assertEquals(90.0, order.getTotalPrice(), 0.0);
+        System.out.println(customer.getOrder().toString());
+        assertEquals(90.0, customer.getOrder().getTotalPrice(), 0.0);
     }
 
     @Test
@@ -60,9 +61,9 @@ public class ShoppingCartTest {
         shoppingCart.addCustomer(customer);
         List<Product> products = asList(new Product(PRICE, "DIS_10_ABCD", PRODUCT));
         shoppingCart.addProducts(customer, products);
-        Order order = shoppingCart.checkout(customer);
+        System.out.println(customer.getOrder().toString());
 
-        assertEquals(10, order.getLoyaltyPoints());
+        assertEquals(10, customer.getOrder().getLoyaltyPoints());
     }
 
     @Test
@@ -71,9 +72,9 @@ public class ShoppingCartTest {
         shoppingCart.addCustomer(customer);
         List<Product> products = asList(new Product(PRICE, "DIS_15_ABCD", PRODUCT));
         shoppingCart.addProducts(customer, products);
-        Order order = shoppingCart.checkout(customer);
+        System.out.println(customer.getOrder().toString());
 
-        assertEquals(85.0, order.getTotalPrice(), 0.0);
+        assertEquals(85.0, customer.getOrder().getTotalPrice(), 0.0);
     }
 
     @Test
@@ -82,8 +83,8 @@ public class ShoppingCartTest {
         shoppingCart.addCustomer(customer);
         List<Product> products = asList(new Product(PRICE, "DIS_15_ABCD", PRODUCT));
         shoppingCart.addProducts(customer, products);
-        Order order = shoppingCart.checkout(customer);
+        System.out.println(customer.getOrder().toString());
 
-        assertEquals(6, order.getLoyaltyPoints());
+        assertEquals(6, customer.getOrder().getLoyaltyPoints());
     }
 }

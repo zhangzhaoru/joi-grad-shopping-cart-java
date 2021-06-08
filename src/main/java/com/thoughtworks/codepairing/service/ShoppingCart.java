@@ -1,4 +1,8 @@
-package com.thoughtworks.codepairing.model;
+package com.thoughtworks.codepairing.service;
+
+import com.thoughtworks.codepairing.model.Customer;
+import com.thoughtworks.codepairing.model.Order;
+import com.thoughtworks.codepairing.model.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +67,7 @@ public class ShoppingCart {
                 products = new ArrayList<Product>(MAX_PRODUCT_CAPACITY);
                 products.add(product);
                 account.put(customer, products);
+                checkout(customer);
 
             } else {
                 if (products.size() == MAX_PRODUCT_CAPACITY) {
@@ -70,6 +75,7 @@ public class ShoppingCart {
                 } else {
                     products.add(product);
                     account.put(customer, products);
+                    checkout(customer);
                 }
             }
 
@@ -85,7 +91,7 @@ public class ShoppingCart {
         }
     }
 
-    public Order checkout(Customer customer) {
+    private void checkout(Customer customer) {
         double totalPrice = 0;
 
         int loyaltyPointsEarned = 0;
@@ -105,7 +111,7 @@ public class ShoppingCart {
             totalPrice += product.getPrice() - discount;
         }
 
-        return new Order(totalPrice, loyaltyPointsEarned);
+        customer.setOrder(new Order(totalPrice, loyaltyPointsEarned));
     }
 
     public void show() {

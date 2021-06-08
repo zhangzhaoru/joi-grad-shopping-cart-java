@@ -3,7 +3,7 @@ package com.thoughtworks.codepairing;
 import com.thoughtworks.codepairing.model.Customer;
 import com.thoughtworks.codepairing.model.Order;
 import com.thoughtworks.codepairing.model.Product;
-import com.thoughtworks.codepairing.model.ShoppingCart;
+import com.thoughtworks.codepairing.service.ShoppingCart;
 
 public class SampleApp {
     public static void main(String[] args) {
@@ -22,7 +22,6 @@ public class SampleApp {
         shoppingCart.addProduct(customer, product3);
         shoppingCart.show();
 
-        Order order = shoppingCart.checkout(customer);
-        System.out.println(order.toString());
+        System.out.println(customer.getOrder().toString());
     }
 }
