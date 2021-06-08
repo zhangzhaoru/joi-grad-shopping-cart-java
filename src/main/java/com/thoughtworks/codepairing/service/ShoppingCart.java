@@ -91,6 +91,7 @@ public class ShoppingCart {
         for (Product product : products) {
             if (prodectName.equals(product.getName())) {
                 if (products.remove(product)) {
+                    account.put(customer,products);
                     checkout(customer);
                     return true;
                 }

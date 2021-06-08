@@ -90,7 +90,7 @@ public class ShoppingCartTest {
     }
 
     @Test
-    public void shouldCalculateMultiCustomer() {
+    public void addMultiCustomerTest() {
         Customer customer1 = new Customer("customer1");
         Customer customer2 = new Customer("customer2");
         Product product1 = new Product(120, "DIS_15_ABCD", "product1");
@@ -113,5 +113,26 @@ public class ShoppingCartTest {
         System.out.println(customer1.getOrder().toString());
         System.out.println(customer2.getOrder().toString());
 
+    }
+
+    @Test
+    public void delProdectTest(){
+        Customer customer1 = new Customer("customer1");
+        Customer customer2 = new Customer("customer2");
+        Product product1 = new Product(120, "DIS_15_ABCD", "product1");
+        Product product2 = new Product(150, "DIS_10_ABCD", "product2");
+        Product product3 = new Product(100, "", "product3");
+        ArrayList<Product> products1 = new ArrayList<>();
+        products1.add(product1);
+        products1.add(product2);
+        products1.add(product3);
+        shoppingCart.addCustomer(customer1);
+        shoppingCart.addProducts(customer1, products1);
+        shoppingCart.show();
+        System.out.printf(customer1.getOrder().toString()+"\n");
+
+        shoppingCart.delProdect(customer1,"product1");
+        shoppingCart.show();
+        System.out.printf(customer1.getOrder().toString()+"\n");
     }
 }
