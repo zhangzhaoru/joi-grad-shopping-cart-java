@@ -147,4 +147,8 @@ public class ShoppingCart {
         }
     }
 
+    public void destroyAccount() {
+        account = new HashMap<Customer, List<Product>>(MAX_ACCOUNT_CAPACITY);
+    }
+
 }
