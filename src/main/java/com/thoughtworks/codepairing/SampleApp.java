@@ -2,7 +2,7 @@ package com.thoughtworks.codepairing;
 
 import com.thoughtworks.codepairing.model.Customer;
 import com.thoughtworks.codepairing.model.Product;
-import com.thoughtworks.codepairing.model.ShoppingCart;
+import com.thoughtworks.codepairing.service.ShoppingCart;
 
 public class SampleApp {
     public static void main(String[] args) {

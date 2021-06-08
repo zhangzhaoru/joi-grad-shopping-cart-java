@@ -1,5 +1,7 @@
-package com.thoughtworks.codepairing.model;
+package com.thoughtworks.codepairing.service;
 
+import com.thoughtworks.codepairing.model.Customer;
+import com.thoughtworks.codepairing.model.Product;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +15,7 @@ public class ShoppingCartTest {
     public static final int PRICE = 100;
     public static final String PRODUCT = "Product";
     private static ShoppingCart shoppingCart=null;
+
 
 
 //

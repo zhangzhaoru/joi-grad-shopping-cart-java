@@ -1,4 +1,8 @@
-package com.thoughtworks.codepairing.model;
+package com.thoughtworks.codepairing.service;
+
+import com.thoughtworks.codepairing.model.Customer;
+import com.thoughtworks.codepairing.model.Order;
+import com.thoughtworks.codepairing.model.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
