@@ -4,6 +4,7 @@ import com.thoughtworks.codepairing.service.ShoppingCart;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static java.util.Arrays.asList;
@@ -86,5 +87,31 @@ public class ShoppingCartTest {
         System.out.println(customer.getOrder().toString());
 
         assertEquals(6, customer.getOrder().getLoyaltyPoints());
+    }
+
+    @Test
+    public void shouldCalculateMultiCustomer() {
+        Customer customer1 = new Customer("customer1");
+        Customer customer2 = new Customer("customer2");
+        Product product1 = new Product(120, "DIS_15_ABCD", "product1");
+        Product product2 = new Product(150, "DIS_10_ABCD", "product2");
+        Product product3 = new Product(100, "", "product3");
+        Product product4 = new Product(100, "DIS_15_ABCD", "product4");
+        Product product5 = new Product(100, "DIS_10_ABCD", "product5");
+        ArrayList<Product> products1 = new ArrayList<>();
+        products1.add(product1);
+        products1.add(product2);
+        products1.add(product3);
+        shoppingCart.addCustomer(customer1);
+        shoppingCart.addProducts(customer1, products1);
+
+        shoppingCart.addCustomer(customer2);
+        shoppingCart.addProduct(customer2, product4);
+        shoppingCart.addProduct(customer2, product5);
+
+        shoppingCart.show();
+        System.out.println(customer1.getOrder().toString());
+        System.out.println(customer2.getOrder().toString());
+
     }
 }
