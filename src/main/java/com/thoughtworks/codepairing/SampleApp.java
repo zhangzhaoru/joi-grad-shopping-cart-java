@@ -1,9 +1,8 @@
 package com.thoughtworks.codepairing;
 
 import com.thoughtworks.codepairing.model.Customer;
-import com.thoughtworks.codepairing.model.Order;
 import com.thoughtworks.codepairing.model.Product;
-import com.thoughtworks.codepairing.service.ShoppingCart;
+import com.thoughtworks.codepairing.model.ShoppingCart;
 
 public class SampleApp {
     public static void main(String[] args) {
