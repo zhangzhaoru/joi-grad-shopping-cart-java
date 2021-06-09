@@ -5,10 +5,7 @@ import com.thoughtworks.codepairing.model.Order;
 import com.thoughtworks.codepairing.model.Product;
 import org.apache.log4j.Logger;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 public class ShoppingCart {
@@ -17,12 +14,13 @@ public class ShoppingCart {
 
     private static final int MAX_ACCOUNT_CAPACITY = 100;
     private static final int MAX_PRODUCT_CAPACITY = 20;
-    private Logger logger = Logger.getLogger(ShoppingCart.class);
+    private static Logger logger = null;
     private static HashMap<Customer, List<Product>> account = null;
 
     private static ShoppingCart instance = null;
 
     private ShoppingCart() {
+        logger = Logger.getLogger(ShoppingCart.class);
         logger.info("Class shoppingCart instantiated,initialization account");
         account = new HashMap<Customer, List<Product>>(MAX_ACCOUNT_CAPACITY);
     }
@@ -130,6 +128,20 @@ public class ShoppingCart {
             logger.info("The customer does not exist");
             return null;
         }
+    }
+
+    public Customer getCustomer(String customerName) {
+        Iterator<Map.Entry<Customer, List<Product>>> it = account.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry<Customer, List<Product>> next = it.next();
+            Customer customer = next.getKey();
+            if (customerName.equals(customer.getName())) {
+                logger.info("Find this customer successfully");
+                return customer;
+            }
+        }
+        logger.info("Account does not have a user named " + customerName);
+        return null;
     }
 
     private void checkout(Customer customer) {
